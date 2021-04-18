@@ -1,0 +1,59 @@
+### Linux ###
+*~
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# Backup files
+*.bak
+
+# Config files
+*.ini
+
+# Temporary files
+tmp/
+~$*
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+#lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Sphinx related
+docs/_build/doctrees
+docs/_build/html
+
+# Python virtual environment
+venv
+
+# VS code settings
+.vscode
+
+# Unit test / coverage reports
+.cache
+
+# custom folders
+yang
+exampleData
