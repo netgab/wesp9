@@ -19,8 +19,9 @@ from pathlib import Path
 import getpass
 
 ## Custon modules
-import wesp9.wesp9Lib.cliParser as cliParser
-import wesp9.wesp9Lib.connection as connection
+import wesp9Lib.cliParser as cliParser
+import wesp9Lib.connection as connection
+
 
 # CONSTANTS ###################################################################
 # Static
@@ -43,11 +44,10 @@ LOG_LEVEL_ERROR = logging.ERROR
 LOG_LEVEL_WARN = logging.WARN
 LOG_LEVEL_INFO = logging.INFO
 LOG_LEVEL_DEBUG = logging.DEBUG
-LOG_LEVEL = LOG_LEVEL_INFO
+LOG_LEVEL = LOG_LEVEL_WARN
 
 # Create logger
-logging.basicConfig(format=LOG_FORMAT_DEFAULT)
-logger = logging.getLogger(PROGRAM_NAME_SHORT)
+logger = logging.getLogger(__name__)
 logger.setLevel(LOG_LEVEL)
 
 ###############################################################################
@@ -56,7 +56,7 @@ logger.setLevel(LOG_LEVEL)
 wesp9Cli = cliParser.cliArguments()
 wesp9Cli.defaultUsername = USER_NAME
 if wesp9Cli.version:
-  print(f'{PROGRAM_NAME_SHORT} verion {PROGRAM_VERSION}')
+  print(f'{PROGRAM_NAME_SHORT} version {PROGRAM_VERSION}')
   sys.exit()
 
 # Logger global configuration #################################################
@@ -68,10 +68,11 @@ elif wesp9Cli.verbose == 2:
 elif wesp9Cli.verbose == 1:
   logLevel = LOG_LEVEL_WARN
 else:
-  logLevel = LOG_LEVEL
+  logLevel = LOG_LEVEL_ERROR
 
 # Change log level
 logger.setLevel(logLevel)
+logging.basicConfig(level=logLevel, format=LOG_FORMAT_DEFAULT)
 
 ###############################################################################
 
@@ -109,7 +110,7 @@ def main():
         f'[{wlcClientStats.clientMac}] AP name={wlcClientStats.apName}  ' \
         f'AP mac={wlcClientStats.apMac}  SSID={wlcClientStats.ssid}  '\
         f'Channel={wlcClientStats.channel}  '\
-        f'RSSI={wlcClientStats.rssi} dBm SNR={wlcClientStats.snr} db  '\
+        f'RSSI={wlcClientStats.rssi} dBm  SNR={wlcClientStats.snr} db  '\
         f'Speed={wlcClientStats.speed} MBit/s  '\
         f'BytesTx/Rx={wlcClientStats.bytesTx}/{wlcClientStats.bytesRx}')
 
@@ -128,10 +129,8 @@ def main():
 
 
 if __name__ == "__main__":
-
     # execute only if run as a script
     main()
-
 
     # Change logging for ping output
     logger.info(f'Done')

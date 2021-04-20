@@ -13,7 +13,7 @@ import requests
 import urllib3
 
 ## Custom
-from wesp9.wesp9Lib.statisticModels import wirlessClientStatistics
+from wesp9Lib.statisticModels import wirlessClientStatistics
 
 # Create logger
 logger = logging.getLogger(__name__)
